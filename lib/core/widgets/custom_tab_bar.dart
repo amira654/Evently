@@ -14,6 +14,7 @@ class CustomTabBar extends StatefulWidget {
     required this.unselectedLabelColor,
     this.verticalPadding = 0,
     required this.onCategoryTabClicked,
+    this.initialIndex = 0,
   });
 
   final List<CategoryDM> categories;
@@ -24,6 +25,7 @@ class CustomTabBar extends StatefulWidget {
   final Color selectedLabelColor;
   final double verticalPadding;
   final void Function(CategoryDM) onCategoryTabClicked;
+  final int initialIndex ;
 
   @override
   State<CustomTabBar> createState() => _CustomTabBarState();
@@ -32,6 +34,10 @@ class CustomTabBar extends StatefulWidget {
 class _CustomTabBarState extends State<CustomTabBar> {
   int selectedIndex = 0;
 
+  initState() {
+    selectedIndex = widget.initialIndex;
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
