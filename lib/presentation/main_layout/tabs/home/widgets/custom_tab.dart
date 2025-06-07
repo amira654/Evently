@@ -1,7 +1,6 @@
 import 'package:evently_app/data/DM/category_DM.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomTab extends StatelessWidget {
   const CustomTab(
@@ -30,12 +29,9 @@ class CustomTab extends StatelessWidget {
           border: Border.all(width: 1, color: selectedTabBg)),
       child: Row(
         children: [
-          SvgPicture.asset(
-            categoryDM.iconPath,
-            colorFilter: ColorFilter.mode(
-              isSelected ? selectedLabelColor : unselectedLabelColor,
-              BlendMode.srcIn,
-            ),
+          Icon(
+            categoryDM.icon,
+            color: isSelected ? selectedLabelColor : unselectedLabelColor,
           ),
           SizedBox(
             width: 8.w,

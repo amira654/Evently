@@ -1,8 +1,10 @@
 import 'package:evently_app/core/resources/colors_manager.dart';
 import 'package:evently_app/core/resources/constant_manager.dart';
+import 'package:evently_app/core/routes_manager/routes_manager.dart';
 import 'package:evently_app/core/widgets/custom_tab_bar.dart';
 import 'package:evently_app/data/DM/category_DM.dart';
 import 'package:evently_app/data/DM/event_DM.dart';
+import 'package:evently_app/data/DM/userDM.dart';
 import 'package:evently_app/data/firebase_service/firebase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -18,7 +20,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  CategoryDM selectedCategory = ConstantManager.categories[0];
+  CategoryDM selectedCategory = ConstantManager.categoriesWithAll[0];
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ class _HomeState extends State<Home> {
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
                 Text(
-                  "John Safwat ",
+                  UserDM.currentUser!.name,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 SizedBox(
@@ -64,7 +66,7 @@ class _HomeState extends State<Home> {
                   height: 16.h,
                 ),
                 CustomTabBar(
-                  categories: ConstantManager.categories,
+                  categories: ConstantManager.categoriesWithAll,
                   selectedTabBg: ColorsManager.light,
                   unselectedTabBg: Colors.transparent,
                   selectedLabelColor: ColorsManager.blue,
@@ -95,7 +97,18 @@ class _HomeState extends State<Home> {
               child: ListView.builder(
                 itemCount: events.length,
                 itemBuilder: (context, index) {
-                  return CustomEvent(event: events[index]);
+                  return InkWell(
+                    onTap: (){
+                     Navigator.pushNamed(context, RoutesManager.eventDetails,
+                       arguments: events[index],  
+                     );
+                    },
+                    child: CustomEvent(
+                      event: events[index],
+                      favEvent: UserDM.currentUser!.favouriteEventsId
+                          .contains(events[index].id),
+                    ),
+                  );
                 },
               ),
             );

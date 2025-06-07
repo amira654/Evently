@@ -20,7 +20,7 @@ class _MainLayoutState extends State<MainLayout> {
   List<Widget> tabs = const [
     Home(),
     Maps(),
-    Favorite(),
+    Favourite(),
     Profile(),
   ];
 

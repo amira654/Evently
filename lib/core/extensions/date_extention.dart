@@ -10,4 +10,8 @@ extension DateFormate on DateTime {
     DateFormat formatter = DateFormat("dd-MM-yyyy");
     return formatter.format(this);
   }
+  String get getTime{
+    DateFormat formatter = DateFormat("hh:mm a");
+    return formatter.format(this);
+  }
 }

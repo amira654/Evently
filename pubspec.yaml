@@ -44,6 +44,13 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   provider:
+  firebase_auth:
+  location:
+  google_maps_flutter:
+  introduction_screen:
+  shared_preferences:
+  google_sign_in: ^6.1.6
+  geocode: ^1.0.3
 
 dev_dependencies:
   flutter_test:

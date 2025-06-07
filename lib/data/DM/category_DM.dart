@@ -1,12 +1,14 @@
+import 'package:flutter/cupertino.dart';
+
 class CategoryDM {
   final String id;
-  final String imagePath;
-  final String iconPath;
+  final String? imagePath;
+  final IconData icon;
   final String categoryName;
 
   const CategoryDM(
       {required this.id,
-      required this.imagePath,
-      required this.iconPath,
+      this.imagePath,
+      required this.icon,
       required this.categoryName});
 }

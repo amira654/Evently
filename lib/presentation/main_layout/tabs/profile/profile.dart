@@ -1,6 +1,9 @@
 import 'package:evently_app/core/resources/colors_manager.dart';
+import 'package:evently_app/core/routes_manager/routes_manager.dart';
 import 'package:evently_app/core/widgets/custom_drop_down_menu.dart';
 import 'package:evently_app/core/widgets/custom_profile_header.dart';
+import 'package:evently_app/data/DM/userDM.dart';
+import 'package:evently_app/data/firebase_service/firebase_service.dart';
 import 'package:evently_app/providers/config_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -24,8 +27,8 @@ class _ProfileState extends State<Profile> {
     return Column(
       children: [
         CustomProfileHeader(
-          userName: "Amira Samy",
-          userEmail: "samy@gmail.com",
+          userName: UserDM.currentUser!.name,
+          userEmail: UserDM.currentUser!.email,
         ),
         Padding(
           padding: REdgeInsets.symmetric(horizontal: 16.0, vertical: 24),
@@ -70,10 +73,14 @@ class _ProfileState extends State<Profile> {
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w500,
                       color: ColorsManager.white)),
-              onPressed: () {},
+              onPressed: () async {
+              await  FirebaseServices.signOut();
+                Navigator.pushNamedAndRemoveUntil(
+                    context, RoutesManager.signIn, (route) => false);
+              },
               child: Row(
                 children: [
-                  Icon(Icons.login_rounded),
+                  const Icon(Icons.login_rounded),
                   SizedBox(
                     width: 5.w,
                   ),
@@ -96,4 +103,5 @@ class _ProfileState extends State<Profile> {
         : ThemeMode.dark;
     configProvider.changeAppTheme(theme);
   }
+
 }
